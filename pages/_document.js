@@ -9,7 +9,7 @@ export default function Document() {
         <link rel="icon" href="/favicon.ico" />
         <script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3110293400012139"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1909197960651918"
           crossOrigin="anonymous"
         />
       </Head>
