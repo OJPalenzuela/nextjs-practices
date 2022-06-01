@@ -1,17 +1,32 @@
-import "../styles/globals.css";
-import Router from "next/router";
-import { useState } from "react";
+import '../styles/globals.css';
+import '../styles/nprogress.css';
+import Router from 'next/router';
 
-function MyApp({ Component, pageProps }) {
-  const [loading, setLoading] = useState(false);
-  Router.events.on("routeChangeStart", () => setLoading(true));
-  Router.events.on("routeChangeComplete", () => setLoading(false));
-  Router.events.on("routeChangeError", () => setLoading(false));
+import { motion } from 'framer-motion';
+import NProgress from 'nprogress';
+
+function MyApp({ Component, pageProps, router }) {
+  Router.events.on('routeChangeStart', () => NProgress.start());
+  Router.events.on('routeChangeComplete', () => NProgress.done());
+  Router.events.on('routeChangeError', () => NProgress.done());
 
   return (
     <>
-      {loading && <h1>Cargando...</h1>}
-      <Component {...pageProps} />;
+      <motion.div
+        key={router.route}
+        initial={'pageInitial'}
+        animate={'pageAnimate'}
+        variants={{
+          pageInitial: {
+            opacity: 0,
+          },
+          pageAnimate: {
+            opacity: 1,
+          },
+        }}
+      >
+        <Component {...pageProps} />;
+      </motion.div>
     </>
   );
 }
