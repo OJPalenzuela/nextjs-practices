@@ -1,14 +1,23 @@
-
-import styles from '../styles/Home.module.css';
+import styles from '@/styles/Home.module.css';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 
 export default function Home() {
   const [showMenu, setShowMenu] = useState(false);
+  const { width } = useWindowDimensions();
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    if (width > 768 && !isDesktop) {
+      setIsDesktop(true);
+    } else if (width < 768 && isDesktop) {
+      setIsDesktop(false);
+    }
+  }, [width]);
   return (
     <div className={styles.container}>
-
       <main className={styles.main}>
         <motion.div
           initial="hidden"
@@ -34,7 +43,7 @@ export default function Home() {
             </Link>
           </h1>
         </motion.div>
-
+        <h2>{isDesktop ? 'Desktop' : 'No Deskop :('}</h2>
         <p
           onClick={() => {
             setShowMenu(!showMenu);
