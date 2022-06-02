@@ -22,6 +22,13 @@ export default function Home() {
         <motion.div
           initial="hidden"
           animate="visible"
+          drag={'x'}
+          dragConstraints={{
+            top: -50,
+            left: -50,
+            right: 50,
+            bottom: 50,
+          }}
           variants={{
             hidden: {
               y: -100,
