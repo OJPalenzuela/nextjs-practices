@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 
-export default function Home() {
+export default function Home({ hola }) {
   const [showMenu, setShowMenu] = useState(false);
   const { width } = useWindowDimensions();
   const [isDesktop, setIsDesktop] = useState(false);
@@ -59,7 +59,7 @@ export default function Home() {
         >
           Get started by editing <button>Drop</button>
         </p>
-
+        {hola}
         {showMenu && (
           <motion.div
             initial="hidden"
@@ -90,3 +90,11 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps = async () => {
+  return {
+    props: {
+      hola: undefined ?? null,
+    },
+  };
+};
